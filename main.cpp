@@ -115,7 +115,7 @@ void acc(Arguments *in, Reply *out){
 }
 
 void btn_fall_irq(){
-    queue.call(&FXOS8700CQ);
+    queue.call(&acc);
 }
 
 int main() {
@@ -162,8 +162,8 @@ int main() {
 
     // start
     pc.printf("start\r\n");
-    redLED = 1;
-    t.start(callback(&queue, &EventQueue::dispatch_forever));
+    led1 = 1;
+    thread.start(callback(&queue, &EventQueue::dispatch_forever));
 
     // Setup a serial interrupt function of receiving data from xbee
     xbee.attach(xbee_rx_interrupt, Serial::RxIrq);
